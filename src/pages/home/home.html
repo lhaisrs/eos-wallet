@@ -1,14 +1,19 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
+    <ion-title item-left>
+      {{account}} Wallet
     </ion-title>
+    <button ion-button item-right (click)="onLogout()" class="btn-logout"><ion-icon name="exit"></ion-icon></button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-item>
+    <ion-label>{{account}}</ion-label>
+    <ion-label>{{balance}}</ion-label>
+  </ion-item>
+  <div padding>
+    <button ion-button full (click)="onSend()">Send</button>
+    <button ion-button full>Receive</button>
+  </div>
 </ion-content>

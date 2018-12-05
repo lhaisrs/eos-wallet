@@ -19,8 +19,8 @@ export class AccountPage {
   public homePage: any = HomePage;
 
   //Model
-  public account: any = '';
-  public privateKey: any = '';
+  public account: any = 'havanalalala';
+  public privateKey: any = '5JeNYc7PM3Vye7qsPrSm52Ju5s9SwzVj7oVqoytBHo1LknYL58h';
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

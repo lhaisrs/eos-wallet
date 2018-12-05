@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
+import { EosProvider } from '../../providers/eos/eos';
 
 /**
  * Generated class for the SendPage page.
@@ -21,18 +23,27 @@ export class SendPage {
   public value: any = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-      public qrScanner: QRScanner) {
+      public eos: EosProvider, public barCodeScanner: BarcodeScanner) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SendPage');
   }
 
-  onQRScanner(){
-    this.qrScanner.prepare().then((status: QRScannerStatus) => {
-      if(status.authorized){
+  onSend(){
+    this.eos.transfer(this.account, Number.parseFloat(this.value)).then(result => {
+      this.navCtrl.pop();
+    }, err => {
+      console.log("Error: ", err);
+    })
 
-      }
+  }
+
+  onQRScanner(){
+    this.barCodeScanner.scan().then(scanData => {
+      this.account = scanData.text;
+    }, err => {
+      console.log("Error: ", err);
     })
   }
 
